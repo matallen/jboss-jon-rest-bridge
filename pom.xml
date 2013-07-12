@@ -9,9 +9,20 @@
 
 	<properties>
 		<server.dir>${env.HOME}/jboss-eap-4.3_CP06/server/default/deploy</server.dir>
+		<rhq.version>4.4.0</rhq.version>
+		<usage.examples>
+		
+		
+			<![CDATA[
+			mvn package -DskipTests jetty:run -Dinstance=1 -Djetty.port=8081
+			
+			http://localhost:7080/jboss-jon-bridge/rest/inventory/agents.json
+			http://localhost:7080/jboss-jon-bridge/rest/inventory/resource/10002/operation/executePromptCommand%20avail%20--force
+			]]>
+		
+		</usage.examples>
 	</properties>
 
-	<!-- mvn package -DskipTests jetty:run -Dinstance=1 -Djetty.port=8081 -->
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -45,20 +56,81 @@
 				</executions>
 			</plugin>
 -->
+<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.10</version>
+				<configuration>
+					<systemProperty>
+						<name>com.sun.management.jmxremote.port</name>
+						<value>9530</value>
+					</systemProperty>
+					<systemProperty>
+						<name>com.sun.management.jmxremote.authenticate</name>
+						<value>false</value>
+					</systemProperty>
+					<!--
+					<jettyConfig>/home/mallen/Applications/jetty-6.1.10/etc/jetty-jmx.xml</jettyConfig>
+					-->
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
+	<!-- 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
 			<version>3.5.6-Final</version>
 		</dependency>
+	 -->
+	 
+		<dependency>
+			<groupId>org.rhq</groupId>
+			<artifactId>rhq-core-domain</artifactId>
+			<version>${rhq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.rhq</groupId>
+			<artifactId>rhq-core-util</artifactId>
+			<version>${rhq.version}</version>
+		</dependency>
+	 	<dependency>
+			<groupId>org.rhq</groupId>
+			<artifactId>rhq-enterprise-comm</artifactId>
+			<version>${rhq.version}</version>
+		</dependency>
+	 	<!--
+	 	<dependency>
+			<groupId>org.rhq</groupId>
+			<artifactId>rhq-enterprise-server</artifactId>
+			<version>${rhq.version}</version>
+		</dependency>
+		-->
+	 	<dependency>
+			<groupId>org.rhq</groupId>
+			<artifactId>rhq-remoting-cli</artifactId>
+			<version>${rhq.version}</version>
+		</dependency>
+	 	<dependency>
+			<groupId>org.rhq</groupId>
+			<artifactId>rhq-remoting-client-api</artifactId>
+			<version>${rhq.version}</version>
+		</dependency>
+	 	<dependency>
+			<groupId>org.rhq</groupId>
+			<artifactId>rhq-script-bindings</artifactId>
+			<version>${rhq.version}</version>
+		</dependency>	 
+	 
+<!-- 
 		<dependency>
 			<groupId>jboss-enterprise.jon.rhq-remoting</groupId>
 			<artifactId>lib</artifactId>
-			<version>3.1.2.GA</version>
+			<version>3.4.0.GA</version>
 		</dependency>
+ -->	 
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
