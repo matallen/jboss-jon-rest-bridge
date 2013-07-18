@@ -2,22 +2,16 @@ package org.jboss.jon.bridge;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import javax.ws.rs.WebApplicationException;
+
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.Provider;
+
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
-import org.jboss.resteasy.core.ResourceMethod;
 import org.jboss.resteasy.core.ServerResponse;
-import org.jboss.resteasy.spi.Failure;
-import org.jboss.resteasy.spi.HttpRequest;
 import org.jboss.resteasy.spi.interception.PostProcessInterceptor;
-import org.jboss.resteasy.spi.interception.PreProcessInterceptor;
 
 @Provider
 @ServerInterceptor
@@ -25,8 +19,9 @@ public class ResponseGeneratorInterceptor implements PostProcessInterceptor{
 
 	@Override
 	public void postProcess(ServerResponse response) {
-		System.out.println("ContentType="+response.getMetadata().get("Content-Type"));
-		String type=MediaType.APPLICATION_XML;
+//		System.out.println("ContentType="+response.getMetadata().get("Content-Type"));
+	  System.out.println("XXXX");
+	  String type=MediaType.APPLICATION_XML;
 		if (response.getMetadata().containsKey("Content-Type")){
 			Object o=response.getMetadata().get("Content-Type").get(0);
 			if (MediaType.class.isAssignableFrom(o.getClass())){

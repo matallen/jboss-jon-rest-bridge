@@ -16,8 +16,18 @@
 			<![CDATA[
 			mvn package -DskipTests jetty:run -Dinstance=1 -Djetty.port=8081
 			
+			# lists all agents
 			http://localhost:7080/jboss-jon-bridge/rest/inventory/agents.json
+			
+			# executes
 			http://localhost:7080/jboss-jon-bridge/rest/inventory/resource/10002/operation/executePromptCommand%20avail%20--force
+			
+			# starts an eap server
+			http://localhost:7080/jboss-jon-bridge/rest/inventory/operation/start/ignored?name=EAP&timeout=1000
+			# stops an eap server
+			http://localhost:7080/jboss-jon-bridge/rest/inventory/operation/shutdown/ignored?name=EAP&timeout=1000
+			
+			
 			]]>
 		
 		</usage.examples>
@@ -151,6 +161,15 @@
 			<artifactId>resteasy-jaxrs</artifactId>
 			<version>2.2.1.GA</version>
 		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>2.2.1.GA</version>
+		</dependency>
+		-->
+		
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
         		<artifactId>servlet-api</artifactId>

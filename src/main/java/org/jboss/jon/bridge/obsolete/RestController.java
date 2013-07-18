@@ -1,5 +1,6 @@
-package org.jboss.jon.bridge;
+package org.jboss.jon.bridge.obsolete;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -41,7 +42,6 @@ public class RestController {
   private static final int port=7080;
   private static final String username="rhqadmin";
   private static final String password="rhqadmin";
-  
   
   @GET @Path("/{param}/find/options") @Produces(value=MediaType.APPLICATION_JSON)
   public Response showFindOptions(@PathParam("param") String ignore) {
